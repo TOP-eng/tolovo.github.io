@@ -1,21 +1,14 @@
 name: Deploy to GitHub Pages
 
-# 触发条件：main 分支推送，或手动触发
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
 
-# 权限配置：必须给 pages 写入权限，否则会失败
 permissions:
   contents: read
   pages: write
   id-token: write
-
-# 部署环境
-environment:
-  name: github-pages
-  url: ${{ steps.deployment.outputs.page_url }}
 
 jobs:
   deploy:
@@ -30,7 +23,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # 部署目录：当前目录（dist 根目录）
           path: '.'
 
       - name: Deploy to GitHub Pages
